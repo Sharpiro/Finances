@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace Finances.Core
 {
-    public class ExcelReader : ISpreadsheetReader
+    public class ExcelService : ISpreadsheetService
     {
         public IEnumerable<Dictionary<string, string>> ReadSheet(string filePath)
         {
@@ -60,6 +60,11 @@ namespace Finances.Core
                     return sharedStringsList;
                 }
             }
+        }
+
+        public byte[] WriteSheet(IEnumerable<Dictionary<string, string>> data)
+        {
+            throw new NotImplementedException();
         }
     }
 }

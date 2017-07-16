@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace Finances.Core
 {
-    public class CsvReader : ISpreadsheetReader
+    public class CsvService : ISpreadsheetService
     {
         public IEnumerable<Dictionary<string, string>> ReadSheet(string filePath)
         {
@@ -25,6 +27,23 @@ namespace Finances.Core
                 }
             );
             return parsedRows;
+        }
+
+        public byte[] WriteSheet(IEnumerable<Dictionary<string, string>> data)
+        {
+            var columnNames = data.First().Select(d => d.Key);
+            var rows = data.Select(d => d.Select(x => x.Value))
+                .ToImmutableList().Insert(0, columnNames);
+            var csvDataBuilder = new StringBuilder();
+            foreach (var row in rows)
+            {
+                var rowString = string.Join(",", row);
+                csvDataBuilder.AppendLine(rowString);
+            }
+
+            var csvData = csvDataBuilder.ToString();
+            var bytes = Encoding.UTF8.GetBytes(csvData);
+            return bytes;
         }
     }
 }

@@ -1,14 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 
 namespace Finances.Core
 {
-    public class CategoryDataStore : IEnumerable<KeyValuePair<string, IImmutableSet<string>>>
+    public class CategoryDataStore : ICategoryDataStore
     {
-        private readonly IImmutableDictionary<string, IImmutableSet<string>> _categoryDictionary =
-            new Dictionary<string, IImmutableSet<string>>
+        private readonly IImmutableDictionary<string, IReadOnlyCollection<string>> _categoryDictionary =
+            new Dictionary<string, IReadOnlyCollection<string>>
             {
                 ["Social"] = new HashSet<string>
                 {
@@ -40,7 +39,7 @@ namespace Finances.Core
                 }.ToImmutableHashSet(),
                 ["Payments"] = new HashSet<string>
                 {
-                    "automatic payment"
+                    "payment"
                 }.ToImmutableHashSet(),
                 ["Grocery"] = new HashSet<string>
                 {
@@ -72,27 +71,26 @@ namespace Finances.Core
                 {
                     "sam ash", "audible", "zumiez", "kindle", "inline warehouse"
                 }.ToImmutableHashSet(),
-                ["Misc"] = new HashSet<string>
-                {
-                    "supercuts"
-                }.ToImmutableHashSet(),
                 ["Amazon Purchases"] = new HashSet<string>
                 {
                     "amazon mktplace pmts", "amazon.com"
                 }.ToImmutableHashSet()
             }.ToImmutableDictionary();
 
-        public string GetCategory(string description)
+        public (string Category, string Description) GetCategory(string description)
         {
             foreach (var categoryPair in _categoryDictionary)
             {
-                if (categoryPair.Value.Any(item => description.ToLowerInvariant().Contains(item)))
-                    return categoryPair.Key;
+                foreach (var item in categoryPair.Value)
+                {
+                    if (description.ToLowerInvariant().Contains(item))
+                        return (categoryPair.Key, item);
+                }
             }
-            return null;
+            return (null, description);
         }
 
-        public IEnumerator<KeyValuePair<string, IImmutableSet<string>>> GetEnumerator()
+        public IEnumerator<KeyValuePair<string, IReadOnlyCollection<string>>> GetEnumerator()
         {
             return _categoryDictionary.GetEnumerator();
         }

@@ -8,6 +8,7 @@ namespace Finances.Core
         public DateTime TransDate { get; set; }
         public DateTime PostDate { get; set; }
         public string Description { get; set; }
+        public string GenericDescription { get; set; }
         public decimal Amount { get; set; }
         public string Category { get; set; }
     }
