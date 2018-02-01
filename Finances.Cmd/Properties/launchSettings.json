@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "Finances.Cmd": {
-      "commandName": "Project",
-      "commandLineArgs": "C:\\Users\\sharpiro\\Desktop\\temp\\finances\\Chase0365_Activity_20170715.CSV"
-    }
-  }
-}

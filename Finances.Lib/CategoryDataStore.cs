@@ -11,6 +11,7 @@ namespace Finances.Core
             {
                 ["Social"] = new HashSet<string>
                 {
+                    "pub",
                     "lyft",
                     "uber",
                     "craft tasting",
@@ -31,7 +32,9 @@ namespace Finances.Core
                     "roxbury",
                     "seoul",
                     "dandelion market",
-                    "204 north"
+                    "204 north",
+                    "brickyard",
+                    "ink-n-ivy"
                 }.ToImmutableHashSet(),
                 ["Fitness"] = new HashSet<string>
                 {
@@ -49,23 +52,33 @@ namespace Finances.Core
                 }.ToImmutableHashSet(),
                 ["Lunch"] = new HashSet<string>
                 {
-                    "emeraldcommons"
+                    "dunkin",
+                    "cafe",
+                    "starbucks",
+                    "emeraldcommons",
+                    "food"
                 }.ToImmutableHashSet(),
                 ["Entertainment"] = new HashSet<string>
                 {
+                    "arena",
+                    "bestbuy",
+                    "amzn",
                     "amazon video",
                     "amazon digital svcs",
                     "netflix",
                     "hbo",
-                    "xbox"
+                    "xbox",
+                    "valve",
+                    "steam",
+                    "blizzard"
                 }.ToImmutableHashSet(),
                 ["Car"] = new HashSet<string>
                 {
-                    "speedway", "bp", "shell", "griffin bros", "geico", "exxon"
+                    "speedway", "bp", "shell", "griffin bros", "geico", "exxon", "state farm"
                 }.ToImmutableHashSet(),
                 ["Computing"] = new HashSet<string>
                 {
-                    "msft", "onedrive"
+                    "msft", "onedrive", "microsoft", "ledger"
                 }.ToImmutableHashSet(),
                 ["Improvement"] = new HashSet<string>
                 {
